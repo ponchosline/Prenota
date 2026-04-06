@@ -48,6 +48,36 @@ const navItems = [
     ),
   },
   {
+    name: "Calendario",
+    href: "/dashboard/calendario",
+    color: "teal" as const,
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Reportes",
+    href: "/dashboard/reportes",
+    color: "indigo" as const,
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Mensajes",
+    href: "/dashboard/mensajes",
+    color: "whatsapp" as const,
+    icon: (
+      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    ),
+  },
+  {
     name: "Ajustes",
     href: "/dashboard/ajustes",
     color: "gray" as const,
@@ -65,6 +95,9 @@ const iconBgColors: Record<string, string> = {
   blue: "bg-[#007AFF26] text-[#007AFF]",
   purple: "bg-[#AF52DE26] text-[#AF52DE]",
   orange: "bg-[#FF950026] text-[#FF9500]",
+  teal: "bg-[#5AC8FA26] text-[#5AC8FA]",
+  indigo: "bg-[#5856D626] text-[#5856D6]",
+  whatsapp: "bg-[#25D36626] text-[#25D366]",
   gray: "bg-[#8E8E9326] text-[#8E8E93]",
 };
 
