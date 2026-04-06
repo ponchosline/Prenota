@@ -13,6 +13,7 @@ interface ClienteDetailProps {
     nombre: string;
     email: string | null;
     telefono: string | null;
+    dni?: string | null;
     notas?: string | null;
     puntos_fidelizacion: number;
   };
@@ -76,6 +77,7 @@ export default function ClienteDetailDrawer({ isOpen, onClose, comercioId, clien
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
+  const [dni, setDni] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const getSupabase = useCallback(() => createBrowserClient(
@@ -126,6 +128,7 @@ export default function ClienteDetailDrawer({ isOpen, onClose, comercioId, clien
       setNombre(cliente.nombre);
       setEmail(cliente.email || "");
       setTelefono(cliente.telefono || "");
+      setDni(cliente.dni || "");
       setNewNota("");
       setShowDeleteConfirm(false);
     }
@@ -155,6 +158,7 @@ export default function ClienteDetailDrawer({ isOpen, onClose, comercioId, clien
     fd.set("nombre", nombre);
     fd.set("email", email);
     fd.set("telefono", telefono);
+    fd.set("dni", dni);
     startTransition(async () => {
       await editarCliente(fd);
       setEditMode(false);
@@ -259,10 +263,17 @@ export default function ClienteDetailDrawer({ isOpen, onClose, comercioId, clien
                 <div className="space-y-3">
                   {editMode ? (
                     <div className="bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-card)] border border-[#3C3C4312] p-4 space-y-3">
-                      <div>
-                        <label className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-label-tertiary)]">Nombre</label>
-                        <input value={nombre} onChange={e => setNombre(e.target.value)}
-                          className="w-full mt-1 border border-[#3C3C4325] rounded-[var(--radius-sm)] px-3 py-2.5 text-[14px] bg-[var(--color-bg-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-mint)] transition" />
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-label-tertiary)]">Nombre</label>
+                          <input value={nombre} onChange={e => setNombre(e.target.value)}
+                            className="w-full mt-1 border border-[#3C3C4325] rounded-[var(--radius-sm)] px-3 py-2.5 text-[14px] bg-[var(--color-bg-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-mint)] transition" />
+                        </div>
+                        <div>
+                          <label className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-label-tertiary)]">DNI</label>
+                          <input value={dni} onChange={e => setDni(e.target.value)} placeholder="12.345.678"
+                            className="w-full mt-1 border border-[#3C3C4325] rounded-[var(--radius-sm)] px-3 py-2.5 text-[14px] bg-[var(--color-bg-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-mint)] transition" />
+                        </div>
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
@@ -288,6 +299,13 @@ export default function ClienteDetailDrawer({ isOpen, onClose, comercioId, clien
                     <>
                       {/* Info card */}
                       <div className="bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-card)] border border-[#3C3C4312] divide-y divide-[#3C3C4310]">
+                        <div className="flex items-center justify-between px-4 py-3">
+                          <div className="flex items-center gap-2.5">
+                            <svg className="w-4 h-4 text-[var(--color-label-tertiary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" /></svg>
+                            <span className="text-[12px] text-[var(--color-label-tertiary)]">DNI</span>
+                          </div>
+                          <span className="text-[13px] font-medium">{cliente.dni || "—"}</span>
+                        </div>
                         <div className="flex items-center justify-between px-4 py-3">
                           <div className="flex items-center gap-2.5">
                             <svg className="w-4 h-4 text-[var(--color-label-tertiary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>

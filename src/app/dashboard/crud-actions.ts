@@ -168,6 +168,7 @@ export async function crearCliente(formData: FormData) {
   const nombre = formData.get('nombre') as string
   const email = formData.get('email') as string
   const telefono = formData.get('telefono') as string
+  const dni = formData.get('dni') as string
   const notas = formData.get('notas') as string
 
   // Create the client
@@ -177,6 +178,7 @@ export async function crearCliente(formData: FormData) {
       nombre,
       email: email || null,
       telefono: telefono || null,
+      dni: dni || null,
       notas: notas || null,
       puntos_fidelizacion: 0,
     })
@@ -228,6 +230,7 @@ export async function editarCliente(formData: FormData) {
   const nombre = formData.get('nombre') as string
   const email = formData.get('email') as string
   const telefono = formData.get('telefono') as string
+  const dni = formData.get('dni') as string
   const notas = formData.get('notas') as string
   const puntosStr = formData.get('puntos_fidelizacion') as string
   const puntos = puntosStr ? parseInt(puntosStr, 10) : undefined
@@ -236,6 +239,7 @@ export async function editarCliente(formData: FormData) {
     nombre,
     email: email || null,
     telefono: telefono || null,
+    dni: dni || null,
     notas: notas || null,
   }
   if (puntos !== undefined) updateData.puntos_fidelizacion = puntos

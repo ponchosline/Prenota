@@ -83,6 +83,7 @@ export interface Cliente {
   nombre: string
   email: string | null
   telefono: string | null
+  dni: string | null
   avatar_url: string | null
   puntos_fidelizacion: number
   created_at: string

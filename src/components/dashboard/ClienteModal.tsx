@@ -11,6 +11,7 @@ interface ClienteModalProps {
     nombre: string;
     email: string | null;
     telefono: string | null;
+    dni?: string | null;
     notas?: string | null;
     puntos_fidelizacion: number;
   } | null;
@@ -23,6 +24,7 @@ export default function ClienteModal({ isOpen, onClose, comercioId, cliente, onS
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
+  const [dni, setDni] = useState("");
   const [notas, setNotas] = useState("");
   const [puntos, setPuntos] = useState(0);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -32,10 +34,11 @@ export default function ClienteModal({ isOpen, onClose, comercioId, cliente, onS
       setNombre(cliente.nombre);
       setEmail(cliente.email || "");
       setTelefono(cliente.telefono || "");
+      setDni(cliente.dni || "");
       setNotas((cliente as Record<string, unknown>).notas as string || "");
       setPuntos(cliente.puntos_fidelizacion);
     } else {
-      setNombre(""); setEmail(""); setTelefono(""); setNotas(""); setPuntos(0);
+      setNombre(""); setEmail(""); setTelefono(""); setDni(""); setNotas(""); setPuntos(0);
     }
     setShowDeleteConfirm(false);
   }, [cliente, isOpen]);
@@ -49,6 +52,7 @@ export default function ClienteModal({ isOpen, onClose, comercioId, cliente, onS
     fd.set("nombre", nombre);
     fd.set("email", email);
     fd.set("telefono", telefono);
+    fd.set("dni", dni);
     fd.set("notas", notas);
     fd.set("puntos_fidelizacion", String(puntos));
     startTransition(async () => {
@@ -104,6 +108,12 @@ export default function ClienteModal({ isOpen, onClose, comercioId, cliente, onS
             <div>
               <label className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-label-tertiary)]">Nombre completo *</label>
               <input value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre y Apellido"
+                className="w-full mt-1 border border-[#3C3C4330] rounded-[var(--radius-sm)] px-3 py-2.5 text-[14px] bg-[#F8F8F8] focus:outline-none focus:ring-2 focus:ring-[var(--color-mint)]" />
+            </div>
+
+            <div>
+              <label className="text-[11px] font-semibold uppercase tracking-wider text-[var(--color-label-tertiary)]">DNI</label>
+              <input value={dni} onChange={e => setDni(e.target.value)} placeholder="12.345.678"
                 className="w-full mt-1 border border-[#3C3C4330] rounded-[var(--radius-sm)] px-3 py-2.5 text-[14px] bg-[#F8F8F8] focus:outline-none focus:ring-2 focus:ring-[var(--color-mint)]" />
             </div>
 
