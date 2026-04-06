@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/* ====== Prenota iOS Design System ====== */
+
+@theme inline {
+  /* iOS System Colors */
+  --color-bg-primary: #F2F2F7;
+  --color-bg-secondary: #FFFFFF;
+  --color-bg-tertiary: #F9F9FB;
+
+  --color-label-primary: #000000;
+  --color-label-secondary: #3C3C43;
+  --color-label-tertiary: #8E8E93;
+
+  --color-separator: #C6C6C8;
+
+  /* Prenota Accent */
+  --color-mint: #66E0C2;
+  --color-mint-dark: #52C4A8;
+  --color-mint-light: #E8FAF5;
+
+  /* iOS Tints */
+  --color-ios-blue: #007AFF;
+  --color-ios-green: #34C759;
+  --color-ios-orange: #FF9500;
+  --color-ios-red: #FF3B30;
+  --color-ios-purple: #AF52DE;
+  --color-ios-gray: #8E8E93;
+
+  /* Shadows */
+  --shadow-card: 0 0.5px 0 rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+
+  /* Radius */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+}
+
+/* ====== Base ====== */
+html {
+  background: var(--color-bg-primary);
+}
+
+body {
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-label-primary);
+  background: var(--color-bg-primary);
+}
+
+/* ====== iOS Glass Effects ====== */
+.glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+}
+
+/* ====== iOS Scrollbar ====== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-separator); border-radius: 2px; }
+
+/* ====== Animations ====== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease forwards;
+  opacity: 0;
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s ease-out forwards;
+}
