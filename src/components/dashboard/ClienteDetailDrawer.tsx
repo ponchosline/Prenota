@@ -78,13 +78,14 @@ export default function ClienteDetailDrawer({ isOpen, onClose, comercioId, clien
   const [telefono, setTelefono] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-  const supabase = createBrowserClient(
+  const getSupabase = useCallback(() => createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  ), []);
 
   const loadData = useCallback(async () => {
     setLoading(true);
+    const supabase = getSupabase();
 
     const [visitsRes, notasRes, rewardsRes] = await Promise.all([
       supabase
@@ -115,7 +116,7 @@ export default function ClienteDetailDrawer({ isOpen, onClose, comercioId, clien
     setNotas((notasRes.data as NotaRecord[]) || []);
     setRewards((rewardsRes.data as RewardRecord[]) || []);
     setLoading(false);
-  }, [comercioId, cliente.id, supabase]);
+  }, [comercioId, cliente.id, getSupabase]);
 
   useEffect(() => {
     if (isOpen) {
@@ -128,11 +129,11 @@ export default function ClienteDetailDrawer({ isOpen, onClose, comercioId, clien
       setNewNota("");
       setShowDeleteConfirm(false);
     }
-  }, [isOpen, cliente]);
+  }, [isOpen, cliente.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAddNota = async () => {
     if (!newNota.trim()) return;
-    await supabase.from("cliente_notas").insert({
+    await getSupabase().from("cliente_notas").insert({
       cliente_id: cliente.id,
       comercio_id: comercioId,
       contenido: newNota.trim(),
@@ -143,7 +144,7 @@ export default function ClienteDetailDrawer({ isOpen, onClose, comercioId, clien
   };
 
   const handleDeleteNota = async (notaId: string) => {
-    await supabase.from("cliente_notas").delete().eq("id", notaId);
+    await getSupabase().from("cliente_notas").delete().eq("id", notaId);
     loadData();
   };
 
